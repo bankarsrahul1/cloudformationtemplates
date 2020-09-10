@@ -1,5 +1,20 @@
 {
-  "Parameters" : {
-    "SNSEmail" : "aws_is_best@email.com"
+"AWSTemplateFormatVersion": "2010-09-09",
+"Parameters" : {
+  "SNSEmail" : {
+    "Type" : "String",
+    "Description" : "Enter email for SNS notification"
   }
-}  
+},
+"Resources" : {
+    "AlertSNSTopic" : {
+        "Type" : "AWS::SNS::Topic",
+        "Properties" : {
+          "Subscription" :  [{
+            "Endpoint" : { "Ref" : "SNSEmail"},
+            "Protocol" : "email"
+          }]
+        }
+      }
+  }
+}
